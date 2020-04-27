@@ -4,15 +4,16 @@ import numpy as np
 import nltk
 from nltk.tokenize.toktok import ToktokTokenizer
 import re
-from bs4 import BeautifulSoup
-from contractions import CONTRACTION_MAP
+from .contractions import CONTRACTION_MAP
 import unicodedata
+
 nlp = spacy.load('en_core', parse=True, tag=True, entity=True)
-#nlp_vec = spacy.load('en_vecs', parse = True, tag=True, #entity=True)
+# nlp_vec = spacy.load('en_vecs', parse = True, tag=True, #entity=True)
 tokenizer = ToktokTokenizer()
 stopword_list = nltk.corpus.stopwords.words('english')
 stopword_list.remove('no')
 stopword_list.remove('not')
+
 
 def remove_accented_chars(text):
     text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8', 'ignore')
@@ -24,8 +25,13 @@ def expand_contractions(text, contraction_mapping=CONTRACTION_MAP):
                                       flags=re.IGNORECASE | re.DOTALL)
 
     def expand_match(contraction):
+        """
+        Called for each matching contraction
+        :param contraction: matching contraction
+        :return: expanded version of the contraction with first letter's case preserved
+        """
         match = contraction.group(0)
-        first_char = match[0]
+        first_char = match[0]  # preserve case of the first character
         expanded_contraction = contraction_mapping.get(match) \
             if contraction_mapping.get(match) \
             else contraction_mapping.get(match.lower())
@@ -36,25 +42,45 @@ def expand_contractions(text, contraction_mapping=CONTRACTION_MAP):
     expanded_text = re.sub("'", "", expanded_text)
     return expanded_text
 
+
 def remove_special_characters(text, remove_digits=False):
     pattern = r'[^a-zA-z0-9\s]' if not remove_digits else r'[^a-zA-z\s]'
     text = re.sub(pattern, '', text)
     return text
 
 
-def simple_stemmer(text):
+def stem(text):
+    """
+    Remove affixes to get stem word. Stem word may not be semantically
+    correct, meaning the word may not be present in dictionary.
+    :param text: text containing non-stemmed words
+    :return: text with stemmed words
+    """
     ps = nltk.porter.PorterStemmer()
     text = ' '.join([ps.stem(word) for word in text.split()])
     return text
 
 
-def lemmatize_text(text):
+def lemmatize(text):
+    """
+    Remove word affixes to get root word. Root word is lexicographically
+    correct word, meaning the word is present in dictionary.
+    :param text: text containing non-lemmatized words
+    :return: text with lemmatized words
+    """
     text = nlp(text)
     text = ' '.join([word.lemma_ if word.lemma_ != '-PRON-' else word.text for word in text])
     return text
 
 
 def remove_stopwords(text, is_lower_case=False):
+    """
+    Remove stopwords which have little or no significance
+    ex) a, an, the, and, etc.
+    :param text: text with stopwords
+    :param is_lower_case: false if the text contains any upper case character
+    :return: text with all stopwords removed
+    """
     tokens = tokenizer.tokenize(text)
     tokens = [token.strip() for token in tokens]
     if is_lower_case:
@@ -72,9 +98,6 @@ def normalize_corpus(corpus, html_stripping=True, contraction_expansion=True,
     normalized_corpus = []
     # normalize each document in the corpus
     for doc in corpus:
-        # strip HTML
-        if html_stripping:
-            doc = strip_html_tags(doc)
         # remove accented characters
         if accented_char_removal:
             doc = remove_accented_chars(doc)
@@ -88,14 +111,14 @@ def normalize_corpus(corpus, html_stripping=True, contraction_expansion=True,
         doc = re.sub(r'[\r|\n|\r\n]+', ' ', doc)
         # lemmatize text
         if text_lemmatization:
-            doc = lemmatize_text(doc)
+            doc = lemmatize(doc)
         # remove special characters and\or digits
         if special_char_removal:
             # insert spaces between special characters to isolate them
             special_char_pattern = re.compile(r'([{.(-)!}])')
             doc = special_char_pattern.sub(" \\1 ", doc)
             doc = remove_special_characters(doc, remove_digits=remove_digits)
-            # remove extra whitespace
+        # remove extra whitespace
         doc = re.sub(' +', ' ', doc)
         # remove stopwords
         if stopword_removal:

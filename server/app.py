@@ -7,6 +7,8 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from google_auth_oauthlib.flow import InstalledAppFlow
 
+from .text_normalize import normalize_corpus
+
 CLIENT_SECRETS_FILE = 'google_api_secret.json'
 SCOPES = ['https://www.googleapis.com/auth/youtube.force-ssl']
 API_SERVICE_NAME = 'youtube'
@@ -44,6 +46,7 @@ def find_videos(youtube, ingredients):
 
     checklists, candidates = dict(), dict()
     for video in response.items:
+        # TODO: normalize video.snippet.title & video.snippet.description
         ingredients_checklist = Checklist(ingredients)
         video_id = video.id.videoId
 
