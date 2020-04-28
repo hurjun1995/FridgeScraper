@@ -7,7 +7,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from google_auth_oauthlib.flow import InstalledAppFlow
 
-from .text_normalize import normalize_corpus
+from .text_normalize import normalize
 
 CLIENT_SECRETS_FILE = 'google_api_secret.json'
 SCOPES = ['https://www.googleapis.com/auth/youtube.force-ssl']
@@ -16,6 +16,8 @@ API_VERSION = 'v3'
 
 app = Flask(__name__)
 api = Api(app)
+
+ALLOWED_NUM_MISSING_INGREDIENT = 2
 
 
 class HelloWorld(Resource):
@@ -44,36 +46,49 @@ def find_videos(youtube, ingredients):
         eventType="completed"
     ).execute()
 
-    checklists, candidates = dict(), dict()
+    selected, candidates = [], []
     for video in response.items:
-        # TODO: normalize video.snippet.title & video.snippet.description
         ingredients_checklist = Checklist(ingredients)
-        video_id = video.id.videoId
+        normalized_title = normalize(video.snippet.title)
+        normalized_desc = normalize(video.snippet.description)
 
-        ingredients_checklist.parse(video.snippet.title)
-        ingredients_checklist.parse(video.snippet.description)
+        ingredients_checklist.parse(normalized_title)
+        ingredients_checklist.parse(normalized_desc)
 
-        if ingredients_checklist.count_checked() > len(ingredients_checklist) - 2:
-            candidates[video_id] = ingredients_checklist
+        if len(ingredients_checklist) - ingredients_checklist.count_checked() <= ALLOWED_NUM_MISSING_INGREDIENT:
+            selected.append((video, ingredients_checklist))
         else:
-            checklists[video_id] = ingredients_checklist
+            candidates.append((video, ingredients_checklist))
 
-    if len(candidates) < 5:
-        # TODO: go over checklists and select best ones
-        pass
+    for video, ingredients_checklist in candidates:
+        if len(selected) < 5:
+            break
 
-    # TODO: merge response.items and candidates and return
+        response = youtube.videos().list(
+            part="snippet",
+            id=video.id.videoId
+        ).execute()
+        video_detail = response.items[0]
+        normalized_desc = normalize(video_detail.snipet.description)
+
+        ingredients_checklist.parse(normalized_desc)
+
+        if len(ingredients_checklist) - ingredients_checklist.count_checked() <= ALLOWED_NUM_MISSING_INGREDIENT:
+            selected.append((video, ingredients_checklist))
+
+    response = [{'id': video.id, 'snippet': video.snippet, 'checklist': checklist} for video, checklist in selected]
+    return response
 
 
 class Checklist:
     def __init__(self, items):
         self.items = items
-        self.checklist = {item: False for item in items}
+        self.checklist = {item.lower(): False for item in items}
 
     def __len__(self):
         return len(self.checklist)
 
-    def check(self, item):
+    def checkoff(self, item):
         if item in self.checklist:
             self.checklist[item] = True
 
@@ -97,12 +112,15 @@ class Checklist:
     def unchecked_items(self):
         return {item: checked for item, checked in self.checklist if checked}
 
-    def parse(text):
+    def parse(self, text):
         """
-    sample ingredients_checklist: {"onion": False, "beef brisket": True}
-    TODO: set value to True if ingredient is found
-    """
-        return {}
+        set value to True if ingredient is found
+        sample ingredients_checklist: {"onion": False, "beef brisket": True}
+        """
+        items = set(self.items)
+        for word in text:
+            if word in items:
+                self.checkoff(word)
 
 
 api.add_resource(HelloWorld, '/')

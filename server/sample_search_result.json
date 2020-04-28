@@ -1,0 +1,182 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "voj3nlQE6nmsK0Qm4g2s72YhTXM",
+  "nextPageToken": "CAUQAA",
+  "regionCode": "CA",
+  "pageInfo": {
+    "totalResults": 222556,
+    "resultsPerPage": 5
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "6f2g_jtNrXIbmqDq403icu7gzoI",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "H3JWjC5Heew"
+      },
+      "snippet": {
+        "publishedAt": "2012-09-06T23:43:02Z",
+        "channelId": "UCOulO1C2veTt4wXhJjKNcBA",
+        "title": "Brisket with Caramelized Onions",
+        "description": "How to make brisket. This super-simple, super-delectable recipe is sure to please!",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/H3JWjC5Heew/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/H3JWjC5Heew/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/H3JWjC5Heew/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "montrealmomTV",
+        "liveBroadcastContent": "none",
+        "publishTime": "2012-09-06T23:43:02Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "XdpRJx1lKCPVP4yPR7_3RsjcC3Y",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "qvNkREhJTyM"
+      },
+      "snippet": {
+        "publishedAt": "2013-10-18T15:25:04Z",
+        "channelId": "UCrUNok4R7jql2FTie7-26bw",
+        "title": "Beef Brisket with Taters and Onions",
+        "description": "This technique of cooking a beef brisket allows you to add some taters and onions to the cook to serve along side the meat at meal time! Give this a try... you will ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/qvNkREhJTyM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/qvNkREhJTyM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/qvNkREhJTyM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Kamado Joe",
+        "liveBroadcastContent": "none",
+        "publishTime": "2013-10-18T15:25:04Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "j6eRsLhh9STNRWXixGAUhoEQd9M",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "fz3yNbhjZzI"
+      },
+      "snippet": {
+        "publishedAt": "2018-09-22T18:22:33Z",
+        "channelId": "UCWpr6wmNCLN3EGt8bfcZhyQ",
+        "title": "Slow Cooked Beef Brisket with Braised Onions-- Cooking Tutorial",
+        "description": "Subscribe to Great Tastes of Manitoba for more cooking and baking tutorials: https://www.youtube.com/user/GreatTastesTV On \"Week in a Day\" Elisabeth Harms ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/fz3yNbhjZzI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/fz3yNbhjZzI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/fz3yNbhjZzI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Great Tastes of Manitoba",
+        "liveBroadcastContent": "none",
+        "publishTime": "2018-09-22T18:22:33Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "e0BE-cKbVqPe3lONlUXC8dGjcOo",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "kBH475YksVQ"
+      },
+      "snippet": {
+        "publishedAt": "2018-01-22T18:10:13Z",
+        "channelId": "UCrUNok4R7jql2FTie7-26bw",
+        "title": "Kamado Joe Smoked Onion Braised Brisket",
+        "description": "Time to take off your 'competition style' hat and try an idea that will surprise you at how quick, easy, delicious, and foolproof brisket can be! Kamado Joe Smoked ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/kBH475YksVQ/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/kBH475YksVQ/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/kBH475YksVQ/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Kamado Joe",
+        "liveBroadcastContent": "none",
+        "publishTime": "2018-01-22T18:10:13Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "80q__LGUPAGOSfjpvPSV-tiN8gE",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "Y9v3o-HxaAc"
+      },
+      "snippet": {
+        "publishedAt": "2018-09-22T18:22:47Z",
+        "channelId": "UCWpr6wmNCLN3EGt8bfcZhyQ",
+        "title": "Slow Cooked Beef Brisket with Braised Onions Part 2-- Cooking Tutorial",
+        "description": "Subscribe to Great Tastes of Manitoba for more cooking and baking tutorials: https://www.youtube.com/user/GreatTastesTV On \"Week in a Day\" Elisabeth Harms ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Y9v3o-HxaAc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Y9v3o-HxaAc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Y9v3o-HxaAc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Great Tastes of Manitoba",
+        "liveBroadcastContent": "none",
+        "publishTime": "2018-09-22T18:22:47Z"
+      }
+    }
+  ]
+}
