@@ -7,7 +7,7 @@ import re
 from .contractions import CONTRACTION_MAP
 import unicodedata
 
-nlp = spacy.load('en_core', parse=True, tag=True, entity=True)
+nlp = spacy.load('en', parse=True, tag=True, entity=True)
 # nlp_vec = spacy.load('en_vecs', parse = True, tag=True, #entity=True)
 tokenizer = ToktokTokenizer()
 stopword_list = nltk.corpus.stopwords.words('english')

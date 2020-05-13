@@ -11,3 +11,5 @@ node_modules/
 
 # dotenv environment variables file
 .env
+./server/google_client_secret.json
+./server/google_service_account_private_key.json
